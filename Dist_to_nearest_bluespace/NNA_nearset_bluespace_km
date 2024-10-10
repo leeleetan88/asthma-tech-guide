@@ -53,4 +53,4 @@ postal_gdf['distance_to_nearest_waterbody_km'] = [
 postal_gdf['nearest_waterbody'] = [waterbody_gdf.geometry.iloc[idx] for idx in indices]
 
 # Step 7: Save results to a new CSV
-postal_gdf.to_csv('postal_with_nearest_waterbody_sampled_km.csv', index=False)
+postal_gdf.to_csv('Dist_to_nearest_bluespace/postal_with_nearest_waterbody_sampled_km.csv', index=False)
