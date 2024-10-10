@@ -4,7 +4,7 @@
 |------------|
 | 1. [Overview](#overview)|
 | 2. [Requirements](#requirements)|
-| 3. [Setting Up the Environment](#settingUptheEnvironment)|
+| 3. [Setting Up the Environment](#setting-up-the-environment)|
 | 2. [Introduction](#introduction)|
 | Row 2 Col 1|
 | Row 3 Col 1|
