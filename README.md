@@ -10,7 +10,8 @@
 | Row 3 Col 1|
 
 ## Overview
-This technical guide aims to....It uses Python with `conda` for environment management.
+The guide aims to enable both clinicians and laypersons to explore the topic of Social Determinants of Health (SDOH) and their correlation with asthma exacerbation.
+It uses Python with `conda` for environment management.
 
 ## Requirements
 - [Anaconda](https://www.anaconda.com/products/individual) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html) installed.
