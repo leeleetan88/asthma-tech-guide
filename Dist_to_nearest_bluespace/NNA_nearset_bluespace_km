@@ -9,8 +9,8 @@ import numpy as np
 
 # Function to convert distances from degrees to kilometers
 def degrees_to_km(distance, latitude):
-    km_per_degree_lat = 111  # 1 degree of latitude is approximately 111 km
-    km_per_degree_lon = 111 * np.cos(np.radians(latitude))  # Adjust for the cosine of latitude
+    km_per_degree_lat = 111.1  # 1 degree of latitude is approximately 111 km
+    km_per_degree_lon = 111.1 * np.cos(np.radians(latitude))  # Adjust for the cosine of latitude
     return distance * km_per_degree_lat  # For latitude
 
 # Step 1: Load the CSV with postal codes and coordinates
