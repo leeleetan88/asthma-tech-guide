@@ -1,0 +1,76 @@
+import pandas as pd
+import geopandas as gpd
+from shapely.geometry import Point
+from scipy.spatial import cKDTree
+import numpy as np
+from geopy.distance import geodesic
+import time
+
+# Parameters for batch processing
+batch_size = 10000  # Process 10,000 postal codes at a time
+output_file = 'Dist_to_nearest_bluespace/filtered_postal_with_nearest_waterbody_km.csv'
+
+# Step 1: Load the CSV with postal codes and coordinates
+csv_file = 'Data_collected/SG_postal.csv'  # Replace with your CSV file path
+postal_data = pd.read_csv(csv_file)
+
+# Step 2: Convert to GeoDataFrame
+geometry = [Point(lon, lat) for lon, lat in zip(postal_data['lon'], postal_data['lat'])]
+postal_gdf = gpd.GeoDataFrame(postal_data, geometry=geometry, crs="EPSG:4326")
+
+# Step 3: Load the GeoJSON file
+geojson_file = 'Data_collected/filtered_output_waterbodies.geojson'  # Replace with your GeoJSON file path
+waterbody_gdf = gpd.read_file(geojson_file)
+
+# Step 4: Prepare the KD-Tree
+# Extract representative point coordinates from each waterbody as (latitude, longitude) tuples
+waterbody_coords = np.array([
+    (geom.representative_point().y, geom.representative_point().x) 
+    for geom in waterbody_gdf.geometry
+])
+
+# Create a KD-Tree for efficient nearest neighbor search
+tree = cKDTree(waterbody_coords)
+
+# Step 5: Batch processing
+num_batches = len(postal_gdf) // batch_size + 1
+
+for batch_num in range(num_batches):
+    start_idx = batch_num * batch_size
+    end_idx = min((batch_num + 1) * batch_size, len(postal_gdf))
+
+    # Select the current batch
+    postal_batch = postal_gdf.iloc[start_idx:end_idx].copy()
+    
+    # Start timing the batch
+    start_time = time.time()
+    
+    # Extract coordinates of postal codes as (latitude, longitude) tuples
+    postal_coords = np.array([
+        (geom.y, geom.x) for geom in postal_batch.geometry
+    ])
+
+    # Query the KD-Tree for nearest neighbors
+    distances, indices = tree.query(postal_coords)
+
+    # Update the DataFrame with nearest waterbody information
+    for i, (distance, nearest_idx) in enumerate(zip(distances, indices)):
+        original_idx = postal_batch.index[i]  # Get the original DataFrame index
+        postal_coords_tuple = (postal_batch.geometry.iloc[i].y, postal_batch.geometry.iloc[i].x)
+        nearest_waterbody_geom = waterbody_gdf.geometry.iloc[nearest_idx]
+        nearest_waterbody_coords = (nearest_waterbody_geom.representative_point().y, nearest_waterbody_geom.representative_point().x)
+        
+        # Calculate geodesic distance for more accuracy
+        geodesic_distance = geodesic(postal_coords_tuple, nearest_waterbody_coords).kilometers
+        
+        # Update the DataFrame using the original index
+        postal_batch.at[original_idx, 'nearest_waterbody_index'] = nearest_idx
+        postal_batch.at[original_idx, 'Distance_to_Nearest_Waterbody_km'] = geodesic_distance
+        # postal_batch.at[original_idx, 'nearest_waterbody'] = nearest_waterbody_geom
+    
+    # Save the current batch's updates to the output file
+    postal_batch.to_csv(output_file, mode='a', header=(batch_num == 0), index=False)
+    
+    # End timing the batch and calculate elapsed time
+    elapsed_time = time.time() - start_time
+    print(f"Batch {batch_num + 1}/{num_batches} completed. {end_idx - start_idx} records processed in {elapsed_time:.2f} seconds.")
