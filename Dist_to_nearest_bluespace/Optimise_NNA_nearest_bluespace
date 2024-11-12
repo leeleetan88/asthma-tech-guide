@@ -19,7 +19,7 @@ geometry = [Point(lon, lat) for lon, lat in zip(postal_data['lon'], postal_data[
 postal_gdf = gpd.GeoDataFrame(postal_data, geometry=geometry, crs="EPSG:4326")
 
 # Step 3: Load the GeoJSON file
-geojson_file = 'Data_collected/MasterPlan2019SDCPWaterbodylayerGEOJSON.geojson'  # Replace with your GeoJSON file path
+geojson_file = 'Data_collected/filtered_output_waterbodies.geojson'  # Replace with your GeoJSON file path
 waterbody_gdf = gpd.read_file(geojson_file)
 
 # Step 4: Prepare the KD-Tree
