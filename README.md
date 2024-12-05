@@ -47,7 +47,7 @@ conda env update -f environment.yml
 
 ## Downloading Required Files
 
-This repository uses a large file that cannot be included directly due to GitHub's size restrictions. You can download the file from the link below:
+This repository uses a large file ('MasterPlan2019LandUselayer.geojson') that cannot be included directly due to GitHub's size restrictions. You can download the file using the instructions below:
 1. Download the file from this [link](https://data.gov.sg/datasets/d_90d86daa5bfaa371668b84fa5f01424f/view)
 2. Save the file to the following location in your local repository:
    ```bash
