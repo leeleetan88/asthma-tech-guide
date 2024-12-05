@@ -8,8 +8,9 @@
 | 4. [Updating the Environment](#updating-the-environment)|
 
 ## Overview
-The guide aims to enable both clinicians and laypersons to explore the topic of Social Determinants of Health (SDOH) and their correlation with asthma exacerbation.
-It uses Python with `conda` for environment management.
+This repository is designed to accompany the Technical Guide for Extracting and Analyzing Social Determinants of Health (SDOH) Data. The guide aims to enable both clinicians and laypersons to explore the topic of Social Determinants of Health (SDOH) and their relationship with asthma exacerbation.
+
+The analysis in this project is performed using Python, with conda for environment management to ensure reproducibility and ease of setup.
 
 ## Requirements
 - [Anaconda](https://www.anaconda.com/products/individual) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html) installed.
