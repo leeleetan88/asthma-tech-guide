@@ -6,6 +6,7 @@
 | 2. [Requirements](#requirements)|
 | 3. [Setting Up the Environment](#setting-up-the-environment)|
 | 4. [Updating the Environment](#updating-the-environment)|
+| 5. [Downloading Required Files](#downloading-the-required-files)|
 
 ## Overview
 This repository is designed to accompany the Technical Guide for Extracting and Analyzing Social Determinants of Health (SDOH) Data. The guide aims to enable both clinicians and laypersons to explore the topic of Social Determinants of Health (SDOH) and their relationship with asthma exacerbation.
