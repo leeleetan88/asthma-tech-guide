@@ -43,3 +43,11 @@ Others can then update their environment to match the changes by running:
 conda env update -f environment.yml
 ```
 
+## Downloading Required Files
+
+This repository uses a large file that cannot be included directly due to GitHub's size restrictions. You can download the file from the link below:
+1. Download the file from this [link](https://data.gov.sg/datasets/d_90d86daa5bfaa371668b84fa5f01424f/view)
+2. Save the file to the following location in your local repository:
+   ```bash
+   /path/to/asthma-tech-guide/data/MasterPlan2019LandUselayer.geojson
+   ```
