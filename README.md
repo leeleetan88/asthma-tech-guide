@@ -51,5 +51,5 @@ This repository uses a large file ('MasterPlan2019LandUselayer.geojson') that ca
 1. Download the file from this [link](https://data.gov.sg/datasets/d_90d86daa5bfaa371668b84fa5f01424f/view)
 2. Save the file to the following location in your local repository:
    ```bash
-   /path/to/asthma-tech-guide/data/MasterPlan2019LandUselayer.geojson
+   /path/to/asthma-tech-guide/Data_collected/MasterPlan2019LandUselayer.geojson
    ```
